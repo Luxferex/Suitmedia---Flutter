@@ -34,5 +34,3 @@ Aplikasi Flutter dengan 3 layar yang mendemonstrasikan navigasi, pengecekan pali
 - **GetX**: State management dan navigasi
 - **HTTP**: Untuk komunikasi dengan API
 - **reqres.in API**: Sumber data pengguna
-
-## 📁 Struktur Proyek
