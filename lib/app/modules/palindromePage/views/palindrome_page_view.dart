@@ -24,7 +24,6 @@ class PalindromePageView extends GetView<PalindromePageController> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Profile Avatar
                 Container(
                   width: 116,
                   height: 116,
@@ -40,7 +39,7 @@ class PalindromePageView extends GetView<PalindromePageController> {
                 ),
                 const SizedBox(height: 58),
 
-                // Name Input
+                // Field Nama
                 Container(
                   height: 47,
                   decoration: BoxDecoration(
@@ -49,7 +48,7 @@ class PalindromePageView extends GetView<PalindromePageController> {
                   ),
                   child: TextField(
                     controller: controller.nameController,
-                    textAlign: TextAlign.center,
+                    textAlign: TextAlign.left,
                     style: const TextStyle(fontSize: 16, color: Colors.black54),
                     decoration: const InputDecoration(
                       hintText: 'Name',
@@ -64,7 +63,7 @@ class PalindromePageView extends GetView<PalindromePageController> {
                 ),
                 const SizedBox(height: 15),
 
-                // Palindrome Input
+                // Field Palindrome
                 Container(
                   height: 47,
                   decoration: BoxDecoration(
@@ -73,7 +72,7 @@ class PalindromePageView extends GetView<PalindromePageController> {
                   ),
                   child: TextField(
                     controller: controller.sentenceController,
-                    textAlign: TextAlign.center,
+                    textAlign: TextAlign.left,
                     style: const TextStyle(fontSize: 16, color: Colors.black54),
                     decoration: const InputDecoration(
                       hintText: 'Palindrome',

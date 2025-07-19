@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 class PalindromePageController extends GetxController {
   final nameController = TextEditingController();
   final sentenceController = TextEditingController();
-  
+
   @override
   void onInit() {
     super.onInit();
@@ -23,17 +23,15 @@ class PalindromePageController extends GetxController {
   }
 
   bool isPalindrome(String text) {
-    // Remove spaces and convert to lowercase
     String cleanText = text.replaceAll(' ', '').toLowerCase();
-    
-    // Check if the string is equal to its reverse
+
     String reversedText = cleanText.split('').reversed.join('');
     return cleanText == reversedText;
   }
 
   void checkPalindrome() {
     String sentence = sentenceController.text.trim();
-    
+
     if (sentence.isEmpty) {
       Get.snackbar(
         'Error',
@@ -44,16 +42,13 @@ class PalindromePageController extends GetxController {
     }
 
     bool result = isPalindrome(sentence);
-    
+
     Get.dialog(
       AlertDialog(
         title: const Text('Result'),
         content: Text(result ? 'isPalindrome' : 'not palindrome'),
         actions: [
-          TextButton(
-            onPressed: () => Get.back(),
-            child: const Text('OK'),
-          ),
+          TextButton(onPressed: () => Get.back(), child: const Text('OK')),
         ],
       ),
     );
@@ -61,7 +56,7 @@ class PalindromePageController extends GetxController {
 
   void goToWelcomePage() {
     String name = nameController.text.trim();
-    
+
     if (name.isEmpty) {
       Get.snackbar(
         'Error',

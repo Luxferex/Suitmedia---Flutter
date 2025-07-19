@@ -7,11 +7,9 @@ class WelcomePageController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    // Get name from arguments
     if (Get.arguments != null && Get.arguments['name'] != null) {
       userName.value = Get.arguments['name'];
     }
-    // Get selected user name from arguments if returning from third screen
     if (Get.arguments != null && Get.arguments['selectedUser'] != null) {
       selectedUserName.value = Get.arguments['selectedUser'];
     }
@@ -23,7 +21,7 @@ class WelcomePageController extends GetxController {
       arguments: {'name': userName.value},
     );
 
-    // Update selected user name if user was selected
+    // Update user dipilih
     if (result != null && result['selectedUser'] != null) {
       selectedUserName.value = result['selectedUser'];
     }

@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import '../../../data/models/user_model.dart';
-import '../../../data/services/api_service.dart'; // Ganti dari dummy_data_service
+import '../../../data/services/api_service.dart';
 
 class SelectUserPageController extends GetxController {
   final users = <User>[].obs;
@@ -34,7 +34,7 @@ class SelectUserPageController extends GetxController {
     }
 
     try {
-      // Gunakan API Service yang baru
+      // API Service
       final response = await ApiService.getUsers(
         page: currentPage.value,
         perPage: 10,
@@ -46,7 +46,6 @@ class SelectUserPageController extends GetxController {
         users.addAll(response.data);
       }
 
-      // Update pagination info dari API response
       totalPages.value = response.totalPages;
       hasMoreData.value = currentPage.value < totalPages.value;
       currentPage.value++;
