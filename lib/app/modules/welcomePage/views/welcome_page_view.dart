@@ -35,12 +35,14 @@ class WelcomePageView extends GetView<WelcomePageController> {
               style: TextStyle(fontSize: 16, color: Colors.black54),
             ),
             const SizedBox(height: 8),
-            // Dynamic name from first screen
+            // Dynamic name - show selected user if available, otherwise show original name
             Obx(
               () => Text(
-                controller.userName.value.isNotEmpty
-                    ? controller.userName.value
-                    : 'Guest',
+                controller.selectedUserName.value != 'Selected User Name'
+                    ? controller.selectedUserName.value
+                    : (controller.userName.value.isNotEmpty
+                          ? controller.userName.value
+                          : 'Guest'),
                 style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
@@ -49,11 +51,13 @@ class WelcomePageView extends GetView<WelcomePageController> {
               ),
             ),
             const Spacer(),
-            // Selected User Name label
+            // Selected User Name label - only show if no user selected
             Center(
               child: Obx(
                 () => Text(
-                  controller.selectedUserName.value,
+                  controller.selectedUserName.value == 'Selected User Name'
+                      ? 'Selected User Name'
+                      : '',
                   style: const TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.w600,

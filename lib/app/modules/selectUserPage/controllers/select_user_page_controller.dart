@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import '../../../data/models/user_model.dart';
-import '../../../data/services/dummy_data_service.dart';
+import '../../../data/services/api_service.dart'; // Ganti dari dummy_data_service
 
 class SelectUserPageController extends GetxController {
   final users = <User>[].obs;
@@ -9,11 +9,11 @@ class SelectUserPageController extends GetxController {
   final hasMoreData = true.obs;
   final currentPage = 1.obs;
   final userName = ''.obs;
+  final totalPages = 1.obs;
 
   @override
   void onInit() {
     super.onInit();
-    // Get name from arguments
     if (Get.arguments != null && Get.arguments['name'] != null) {
       userName.value = Get.arguments['name'];
     }
@@ -34,22 +34,21 @@ class SelectUserPageController extends GetxController {
     }
 
     try {
-      List<User> newUsers;
-
-      if (currentPage.value == 1) {
-        newUsers = await DummyDataService.getUsers(page: 1);
-      } else {
-        newUsers = await DummyDataService.getMoreUsers(page: currentPage.value);
-      }
+      // Gunakan API Service yang baru
+      final response = await ApiService.getUsers(
+        page: currentPage.value,
+        perPage: 10,
+      );
 
       if (isRefresh) {
-        users.value = newUsers;
+        users.value = response.data;
       } else {
-        users.addAll(newUsers);
+        users.addAll(response.data);
       }
 
-      // Simulate pagination - has more data only if current page is 1
-      hasMoreData.value = currentPage.value == 1;
+      // Update pagination info dari API response
+      totalPages.value = response.totalPages;
+      hasMoreData.value = currentPage.value < totalPages.value;
       currentPage.value++;
     } catch (e) {
       Get.snackbar(
@@ -74,7 +73,6 @@ class SelectUserPageController extends GetxController {
   }
 
   void selectUser(User user) {
-    // Navigate back to welcome page with selected user
     Get.back(result: {'selectedUser': user.fullName, 'name': userName.value});
   }
 
